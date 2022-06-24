@@ -1,6 +1,4 @@
 from fastapi import APIRouter, Response, HTTPException
-from pymysql import NULL
-from sqlalchemy import null
 from config.database import conn
 from models.restaurant import restaurant
 from starlette.status import HTTP_204_NO_CONTENT
@@ -32,12 +30,19 @@ def create_restaurant(n_restaurant : Restaurant):
 def get_restaurant(id : int):
     res = conn.execute(restaurant.select().where(restaurant.c.idRestaurant == id)).first()
     print(res)
+    if id < 0:
+        return HTTPException(status_code=404, detail="Item negative ot exist")
+    
     if res == None:
         return HTTPException(status_code=404, detail="Item not found")
+    
 
     return conn.execute(restaurant.select().where(restaurant.c.idRestaurant == id)).first()
 
-@restaurants.delete("/restaurants/delete{id}")
+@restaurants.delete("/restaurants/delete/{id}")
 def delete_restaurant(id : int):
-    conn.execute(restaurant.delete().where(restaurant.c.idRestaurant == id))
+    res = conn.execute(restaurant.delete().where(restaurant.c.idRestaurant == id))
+    if res == None:
+        return HTTPException(status_code=404, detail="Item not exist")
+
     return Response(status_code=HTTP_204_NO_CONTENT)
