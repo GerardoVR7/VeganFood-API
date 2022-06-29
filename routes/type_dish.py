@@ -36,3 +36,12 @@ def delete_type_dish(id : int):
         return HTTPException(status_code=404, detail="Item not exist")
 
     return Response(status_code=HTTP_204_NO_CONTENT)
+
+
+@type.put("/type_dish/update/{id}")
+def update_dish(id: str, u_type_dish: Type):
+    conn.execute(type_dish.update().values(
+        type=u_type_dish.type
+    ).where(type_dish.c.id == id)
+        )
+    return "ready update"

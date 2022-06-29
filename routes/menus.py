@@ -39,3 +39,10 @@ def delete_menu(id : int):
     return Response(status_code=HTTP_204_NO_CONTENT)
 
 
+@menus.put("/menu/update/{id}")
+def update_dish(id: str, menu: Menus):
+    conn.execute(auxmenu.update().values(
+        name=menu.name,
+    ).where(auxmenu.c.id == id)
+                 )
+    return "ready update"
