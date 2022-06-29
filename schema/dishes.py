@@ -6,3 +6,5 @@ class Dishes(BaseModel):
     id_menu: int
     id_type: int
     name: str
+    principal_ingredient: str
+    price: float

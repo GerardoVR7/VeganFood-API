@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Table, ForeignKey
+from sqlalchemy import Column, Float, Table, ForeignKey
 from sqlalchemy.sql.sqltypes import Integer, String
 from config.database import meta, engine
 
@@ -9,6 +9,8 @@ dishes = Table(
     Column("id_menu", Integer, ForeignKey("menu.id")),
     Column("id_type", Integer, ForeignKey("type_dish.id")),
     Column("name",String(255),),
+    Column("principal_ingredient", String(255),),
+    Column("price", Float)
 )
 
 meta.create_all(engine)

@@ -25,7 +25,9 @@ def create_dish(new_dish : Dishes):
     new_dish = {
         "id_menu": new_dish.id_menu,
         "id_type": new_dish.id_type,
-        "name": new_dish.name
+        "name": new_dish.name,
+        "principal_ingredient": new_dish.principal_ingredient,
+        "price": new_dish.price
     }
     result = conn.execute(dishes.insert().values(new_dish))
     print(result.lastrowid)
