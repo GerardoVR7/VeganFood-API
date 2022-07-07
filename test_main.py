@@ -5,7 +5,7 @@ from starlette.status import HTTP_204_NO_CONTENT
 client = TestClient(main.app)
 
 new_data_restaurant = {
-    "idRestaurant": 18,
+    "idRestaurant": 19,
     "name": "prueba3",
     "description": "esto es una prueba3"
 }
@@ -39,10 +39,10 @@ def test_restaurants():
     assert response.status_code == 200
 
 
-# def test_create_restaurant():
-#     response = client.post("/restaurants/create", json=data)
-#     assert response.status_code == 200
-#     assert response.json() == data
+def test_create_restaurant():
+    response = client.post("/restaurants/create", json=new_data_restaurant)
+    assert response.status_code == 200
+    assert response.json() == new_data_restaurant
 
 
 def test_get_all_restaurants():
