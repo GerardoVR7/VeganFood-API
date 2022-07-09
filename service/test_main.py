@@ -1,5 +1,5 @@
 from fastapi.testclient import TestClient
-import main
+import service.main as main
 from starlette.status import HTTP_204_NO_CONTENT
 
 client = TestClient(main.app)

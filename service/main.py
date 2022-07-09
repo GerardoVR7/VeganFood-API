@@ -1,8 +1,8 @@
 from fastapi import FastAPI
-from routes.restaurants import restaurants
-from routes.menus import menus
-from routes.type_dish import type
-from routes.dishes import r_dishes
+from .routes.restaurants import restaurants
+from .routes.menus import menus
+from .routes.type_dish import type
+from .routes.dishes import r_dishes
 
 app = FastAPI()
 app.include_router(restaurants)
