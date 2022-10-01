@@ -4,6 +4,8 @@ from models.restaurant import restaurant
 from starlette.status import HTTP_204_NO_CONTENT
 from cryptography.fernet import Fernet
 from schema.restaurant import Restaurant
+from fastapi.responses import JSONResponse
+from fastapi.encoders import jsonable_encoder
 
 restaurants = APIRouter()
 
@@ -14,7 +16,10 @@ f = Fernet(key)
 
 @restaurants.get("/restaurants")
 def get_all_restaruants():
-    return conn.execute(restaurant.select()).fetchall() 
+    item = conn.execute(restaurant.select()).fetchall()
+    json_compatible_item_data = jsonable_encoder(item[0])
+    response =JSONResponse(content= json_compatible_item_data) 
+    return item
 
 @restaurants.post("/restaurants/create")
 def create_restaurant(n_restaurant : Restaurant):
