@@ -27,5 +27,5 @@ app.include_router(r_dishes)
 
 @app.get("/")
 def home():
-    return {"BIENVENIDO": "HAS LLEGADO A LA API DE RESTAURANTES    ESPECIALIZADOS EN PLATOS DE COMIDA       QUEREMOS UN  100"}
+    return {"BIENVENIDO": "hola"}
 
